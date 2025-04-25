@@ -14,12 +14,7 @@ private:
     float price;
 
 public:
-    Meal(int id, string n, MealType t, float p) {
-        set_meal_id();
-        set_name();
-        set_type();
-        set_price();
-    }
+
 
     void print() const {
         cout << "Meal: " << name << ", Type: " << type << ", Price: " << price << endl;
@@ -79,11 +74,58 @@ public:
 };
 
 
+class din {
+private:
+    int hall_id;
+    string address;
+    int capacity;
+
+public:
+
+    void print() const {
+        cout << "Dining Hall: " << address << ", Capacity: " << capacity << endl;
+    }
+
+    void input(){
+        set_hall_id();
+        set_address();
+        set_capacity();
+                }
+
+    // Setters with validation
+    void set_hall_id() { cout<<"enter id:";cin>>hall_id; }
+    void set_address() { cout<<"enter address:";cin>>address; }
+    void set_capacity() {
+         for(int i=0;i<1;)
+            {
+                cout<<"enter capacity:";
+                cin>>capacity;
+                if (capacity > 0) { i++;}
+
+
+                 else cout<<endl<<"enter again";
+            }
+    }
+
+    // Getters
+    int get_hall_id() const { return hall_id; }
+    string get_address() const { return address; }
+    int get_capacity() const { return capacity; }
+};
+
+
+
 int main(){
 
  M hj;
 
 hj.input();
+hj.print();
+
+din k;
+
+k.input();
+k.print();
 
 return 0;
 }
