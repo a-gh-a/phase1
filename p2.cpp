@@ -116,18 +116,47 @@ public:
     int get_capacity() const { return capacity; }
 };
 
+class User {
+protected:
+    int userID;
+    string name, lastName;
+    string hashedPassword;
+
+public:
+
+    //User(int id, string n, string ln, string pwd) : userID(id), name(n), lastName(ln), hashedPassword(pwd) {}
+
+    // Getters
+    int getUserID() const { return userID; }
+    string getName() const { return name; }
+    string getLastName() const { return lastName; }
+    string getHashedPassword() const { return hashedPassword; }
+
+    // Setters
+    void setName(string n) { name = n; }
+    void setLastName(string ln) { lastName = ln; }
+    void setHashedPassword(string pwd) { hashedPassword = pwd; }
+
+
+    virtual void print() const {
+        cout << "User ID: " << userID << ", Name: " << name << " " << lastName << endl;
+    }
+};
 
 
 
 
-class Student {
+
+class Student : public User {
 private:
     int student_id;
     string name, email;
     float balance;
     vector<int> reservations;
+    bool active;
 
 public:
+
 
 
     void print() const {
@@ -140,6 +169,7 @@ public:
      set_name();
      set_email();
      set_balance();
+     set_active();
     }
 
     bool reserve_meal(int meal_id, float price) {
@@ -166,6 +196,13 @@ public:
     // Setters with validation
     void set_student_id() { cout<<"enter student_id:";cin>>student_id;  }
     void set_name() { cout<<"enter student_name:"; cin>>name; }
+    void set_active() {
+          int i;
+          cout<< " activated ?(yes=1,no=0)"<<endl;
+          cin>>i;
+          if(i==0) active=true;
+          else active=false;
+    }
     void set_email() {
 
         for(int i=0;i<1;)
@@ -198,6 +235,7 @@ public:
     string get_name() const { return name; }
     string get_email() const { return email; }
     float get_balance() const { return balance; }
+    bool get_active() const {return active;}
 };
 
 
@@ -261,6 +299,27 @@ public:
 
 
 
+
+
+
+class Admin : public Student{
+public:
+
+
+
+    // مدیریت وضعیت فعال بودن
+    void activateUser(User& user) {
+        cout << "User: " << user.getName()<<endl;
+        set_active();
+
+    }
+
+
+    // چاپ اطلاعات Admin
+    void print() const {
+        cout << "Admin ID: " << getUserID() << ", Name: " << getName() << " " << getLastName() << endl;
+    }
+};
 
 int main(){
 
