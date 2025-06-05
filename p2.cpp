@@ -7,6 +7,7 @@
 using namespace std;
 
 enum MealType { BREAKFAST, LUNCH, DINNER };
+enum day {MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY};
 
 class M
  {
@@ -15,12 +16,13 @@ private:
     string name;
     MealType type;
     float price;
+    day day_Re;
 
 public:
 
 
     void print() const {
-        cout << "Meal: " << name << ", Type: " << type << ", Price: " << price << endl;
+        cout << "Meal: " << name << ", Type: " << type << ", Price: " << price <<",day:"<<day_Re<< endl;
     }
 
 
@@ -29,6 +31,7 @@ public:
         set_name();
         set_type();
         set_price();
+        set_day();
         }
 
     // Setters with validation
@@ -69,11 +72,25 @@ public:
             }
     }
 
+    void set_day(){
+    int i;
+    cout<<"enter day(1,2,3,4,5):";
+    cin>>i;
+    if(i==1)day_Re=MONDAY;
+    if(i==2)day_Re=TUESDAY;
+    if(i==3)day_Re=WEDNESDAY;
+    if(i==4)day_Re=THURSDAY;
+    else day_Re=FRIDAY;
+
+
+    }
+
     // Getters
     int get_meal_id() const { return meal_id; }
     string get_name() const { return name; }
     MealType get_type() const { return type; }
     float get_price() const { return price; }
+    day get_day() const {return day_Re;}
 };
 
 
@@ -154,6 +171,7 @@ private:
     float balance;
     vector<int> reservations;
     bool active;
+    int phone;
 
 public:
 
@@ -170,6 +188,7 @@ public:
      set_email();
      set_balance();
      set_active();
+     set_phone();
     }
 
     bool reserve_meal(int meal_id, float price) {
@@ -189,11 +208,12 @@ public:
                 return true;
             }
         }
-        std::cerr << "رزرو یافت نشد!\n";
+        std::cerr << "error\n";
         return false;
     }
 
     // Setters with validation
+    void set_phone (){cout<<"enter phone:";cin>>phone;}
     void set_student_id() { cout<<"enter student_id:";cin>>student_id;  }
     void set_name() { cout<<"enter student_name:"; cin>>name; }
     void set_active() {
@@ -231,6 +251,7 @@ public:
     }
 
     // Getters
+    int get_phone() const {return phone;}
     int get_student_id() const { return student_id; }
     string get_name() const { return name; }
     string get_email() const { return email; }
@@ -285,7 +306,7 @@ public:
         if(i==1)status=SUCCESS;
         if(i==2)status=CANCELLED;
         if(i==3)status=FAILED;
-
+        else cout<<"error";
       }
 
     // Getters
@@ -319,6 +340,35 @@ public:
     void print() const {
         cout << "Admin ID: " << getUserID() << ", Name: " << getName() << " " << getLastName() << endl;
     }
+};
+
+
+
+class Panel {
+public:
+    // نمایش منو
+    void showMenu() {
+        cout << "1. display student information\n";
+        cout << "2. show credit\n";
+        cout << "3. view reservations\n";
+        cout << "4. add reservation\n";
+        cout << "5. add to cart\n";
+        cout << "6. purchase confirmation\n";
+        cout << "7. cancel the reservation\n";
+        cout << "8. EXIT";
+    }
+
+    // توابع مربوط به تعاملات کاربری
+    void showStudentInfo();
+    void checkBalance();
+    void viewReservations();
+    void addReservation(Reservation);
+    void addToShoppingCart();
+    void confirmShoppingCart();
+    void removeShoppingCartItem();
+    void increaseBalance();
+    void cancelReservation(int);
+    void exit();
 };
 
 int main(){
